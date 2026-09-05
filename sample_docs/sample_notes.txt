@@ -1,0 +1,174 @@
+================================================================================
+COURSE: CS301 - OPERATING SYSTEMS ARCHITECTURE & DESIGN
+STUDY NOTES & EXAM REVIEW
+================================================================================
+
+UNIT 1: INTRODUCTION & PROCESS MANAGEMENT
+--------------------------------------------------------------------------------
+1.1 What is an Operating System?
+An Operating System (OS) is system software that acts as an intermediary between computer hardware and user applications. Its primary objectives are convenience (making the computer system easy to use), efficiency (managing hardware resources effectively), and security/isolation.
+
+Core OS Components:
+- Kernel: The core program running at all times with full supervisor/ring-0 privileges, handling memory management, process management, file systems, and hardware I/O.
+- Shell / System Call Interface: The user-space interface allowing programs to request services from the kernel via software interrupts or system calls (e.g., fork, exec, read, write).
+
+1.2 Process Concept & Process Control Block (PCB)
+A process is defined as a program in execution. Unlike a static program stored on secondary storage (passive entity), a process is an active entity occupying memory.
+
+A process address space contains:
+1. Text Section: Compiled executable code instructions.
+2. Data Section: Global and static variables.
+3. Heap: Dynamically allocated memory at runtime (e.g., malloc in C, new in C++). Grows upward toward higher memory.
+4. Stack: Local variables, function parameters, return addresses, and activation records. Grows downward.
+
+The Process Control Block (PCB) is the OS kernel data structure containing all metadata needed to track and schedule a process:
+- Process ID (PID)
+- Process State (New, Ready, Running, Waiting, Terminated)
+- Program Counter (PC): Memory address of the next instruction to execute
+- CPU Registers: Accumulators, index registers, stack pointers
+- CPU Scheduling Information: Process priority, scheduling queue pointers
+- Memory-Management Information: Page tables or segment tables
+- Accounting & I/O Status Information: CPU time used, list of open file descriptors
+
+1.3 Process Lifecycle States
+During execution, a process moves through five primary states:
+1. New: The process is being created and its PCB initialized.
+2. Ready: The process is loaded into main memory and waiting to be assigned to a CPU core by the short-term scheduler.
+3. Running: The process instructions are currently being executed on the CPU core.
+4. Waiting (Blocked): The process is waiting for some external event or resource (such as I/O completion or synchronization signal).
+5. Terminated: The process has finished execution, and the OS reclaims its allocated resources.
+
+Key State Transitions:
+- Ready to Running: Occurs via the CPU scheduler dispatch.
+- Running to Ready: Occurs when an interrupt fires or the time slice (quantum) expires in preemptive systems.
+- Running to Waiting: Occurs when a process requests an I/O operation or waits for a lock/semaphore.
+- Waiting to Ready: Occurs when the requested I/O completes or an event signal is delivered.
+
+--------------------------------------------------------------------------------
+UNIT 2: PROCESSES VS. THREADS
+--------------------------------------------------------------------------------
+2.1 Definition & Distinction
+A thread is the smallest schedulable unit of CPU execution within a process, often referred to as a "lightweight process" (LWP). While a process provides resource isolation, threads provide concurrency within the same process context.
+
+Shared Resources Among Threads of the Same Process:
+- Code (Text) section
+- Data section (global variables)
+- Heap memory (dynamically allocated buffers)
+- Open file descriptors and OS signals
+
+Unique Resources Per Thread (Private to each thread):
+- Thread ID (TID)
+- Program Counter (PC)
+- CPU Register set
+- Private Call Stack (for local variable tracking and function calls)
+
+2.2 Detailed Comparison Table: Process vs. Thread
+- Memory Space: Processes have completely separate virtual address spaces protected by hardware memory boundaries. Threads share the same address space of their parent process.
+- Creation Overhead: Heavyweight for processes (requires duplicating page tables, file descriptors, address space mapping). Lightweight for threads (allocates only a new stack and register context).
+- Context Switching Cost: Switching between processes requires invalidating the Translation Lookaside Buffer (TLB), swapping page tables, and significant CPU cache misses. Switching between threads of the same process does not flush the TLB or page tables, making it drastically faster.
+- Communication: Processes require explicit Inter-Process Communication (IPC) mechanisms like UNIX pipes, sockets, message queues, or shared memory segments. Threads communicate directly by reading and writing shared heap/global memory variables.
+- Fault Isolation: A crash in one process (e.g., segmentation fault) is isolated by the OS and does not directly terminate other processes. A crash in one thread can corrupt shared heap memory or crash the entire parent process.
+
+--------------------------------------------------------------------------------
+UNIT 3: CPU SCHEDULING ALGORITHMS
+--------------------------------------------------------------------------------
+3.1 Scheduling Criteria
+The CPU scheduler selects a process from the Ready queue when the CPU becomes idle. Schedulers are evaluated on:
+- CPU Utilization: Percentage of time the CPU is doing useful work (ideal: 40% to 90%).
+- Throughput: Number of processes completed per unit time.
+- Turnaround Time: Total elapsed time from process submission to completion (Turnaround = Completion Time - Arrival Time).
+- Waiting Time: Total time a process spends waiting in the Ready queue (Waiting Time = Turnaround Time - Burst Time).
+- Response Time: Time from submission until the first response or CPU allocation is produced.
+
+3.2 Major Scheduling Algorithms
+1. First-Come, First-Served (FCFS):
+   - Non-preemptive. Processes are dispatched strictly in order of arrival.
+   - Disadvantage: Convoy Effect, where short processes are forced to wait behind a single CPU-intensive process, driving up average waiting time.
+
+2. Shortest Job First (SJF) & Shortest Remaining Time First (SRTF):
+   - SJF is provably optimal for minimizing average waiting time.
+   - Non-preemptive SJF selects the waiting process with the smallest CPU burst.
+   - Preemptive version is known as Shortest Remaining Time First (SRTF): if a new process arrives with a remaining CPU burst shorter than the currently running process, the CPU preempts the running process.
+   - Disadvantage: Starvation of long jobs if short jobs arrive continuously; requires knowing or estimating future CPU burst lengths using exponential smoothing.
+
+3. Round Robin (RR) Scheduling:
+   - Designed specifically for time-sharing systems.
+   - Each process is allocated a fixed slice of CPU time called a "Time Quantum" (typically 10 to 100 milliseconds).
+   - If the process burst is longer than the quantum, it is preempted and placed at the tail of the Ready queue.
+   - Quantum Size Trade-off: If the quantum is too large, RR behaves like FCFS. If the quantum is too small, excessive context switching overhead degrades system performance. A rule of thumb is that 80% of CPU bursts should be shorter than the time quantum.
+
+4. Priority Scheduling:
+   - An integer priority is associated with each process; CPU is allocated to the process with highest priority (convention varies whether smallest integer means highest priority).
+   - Problem: Indefinite blocking (Starvation) of low-priority processes.
+   - Solution: Aging technique, where the priority of processes waiting in the Ready queue is gradually increased over time.
+
+--------------------------------------------------------------------------------
+UNIT 4: PROCESS SYNCHRONIZATION & CRITICAL SECTIONS
+--------------------------------------------------------------------------------
+4.1 The Critical Section Problem
+When concurrent processes share resources (such as global memory or shared files), a Race Condition occurs if the final outcome depends on the specific execution order of operations.
+A Critical Section is a segment of code where shared resources are accessed.
+
+Any valid solution to the Critical Section problem must satisfy three strict requirements:
+1. Mutual Exclusion: If process P_i is executing in its critical section, no other process can be executing in their critical section.
+2. Progress: If no process is in its critical section and some processes wish to enter, only processes not in their remainder section can participate in the decision of who enters next, and selection cannot be postponed indefinitely.
+3. Bounded Waiting: There must be a bound on the number of times other processes are allowed to enter their critical sections after a process has requested entry and before that request is granted, preventing starvation.
+
+4.2 Synchronization Primitives: Mutex & Semaphores
+- Mutex (Mutual Exclusion Lock): A boolean lock (acquired or released). Only the thread that acquired the mutex lock is permitted to unlock it.
+- Semaphores: An integer synchronization variable initialized to a non-negative value, modified only through two atomic operations:
+  1. wait() [also known as P() or down()]: Decrements the semaphore value. If the value becomes negative, the calling process blocks until signaled.
+  2. signal() [also known as V() or up()]: Increments the semaphore value. If any processes were blocked, one is unblocked.
+- Binary Semaphore: Value ranges strictly between 0 and 1; functions like a lock but can be signaled by any thread.
+- Counting Semaphore: Initialized to N (representing N available instances of a resource); controls access to a finite pool of resources.
+
+--------------------------------------------------------------------------------
+UNIT 5: DEADLOCKS
+--------------------------------------------------------------------------------
+5.1 Deadlock Definition
+A deadlock is a situation where a set of processes are blocked because each process is holding a resource and waiting for another resource acquired by some other process in the set, resulting in permanent stagnation.
+
+5.2 The 4 Coffman Conditions
+For a deadlock to occur, all four of the following Coffman conditions must hold simultaneously:
+1. Mutual Exclusion: At least one resource must be held in a non-shareable mode (only one process can use it at a time).
+2. Hold and Wait: A process must currently hold at least one resource while waiting to acquire additional resources held by other processes.
+3. No Preemption: Resources cannot be forcibly preempted from a process; a resource can be released only voluntarily by the process holding it after task completion.
+4. Circular Wait: A closed chain of processes exists {P0, P1, ..., Pn} such that P0 is waiting for a resource held by P1, P1 is waiting for a resource held by P2, ..., and Pn is waiting for a resource held by P0.
+
+5.3 Deadlock Handling Strategies
+Modern operating systems manage deadlocks using one of four strategies:
+1. Deadlock Prevention: Eliminates deadlock by designing system protocols that mathematically guarantee at least one of the four Coffman conditions can never hold.
+   - Prevent Hold and Wait: Require processes to request all needed resources simultaneously before execution begins.
+   - Prevent Circular Wait: Impose a strict global numerical ordering on all resource types and require processes to request resources only in strictly increasing numerical order.
+2. Deadlock Avoidance: The OS uses dynamic runtime knowledge of future resource requests to avoid entering an "Unsafe State".
+   - Banker's Algorithm (Dijkstra): Evaluates maximum resource demand, currently allocated resources, and available resources before granting any request. A request is granted only if the resulting state leaves a "safe sequence" where all processes can eventually finish.
+3. Deadlock Detection and Recovery: Allows deadlocks to occur, periodically runs a cycle detection algorithm on the Resource Allocation Graph (or Wait-For Graph), and recovers by aborting one or more deadlocked processes or preempting resources.
+4. Deadlock Ignorance (The Ostrich Algorithm): Ignores the problem entirely assuming deadlocks occur rarely. Used by most general-purpose operating systems (including Linux and Windows) because the performance overhead of prevention and avoidance outweighs the cost of rare manual user reboots.
+
+--------------------------------------------------------------------------------
+UNIT 6: MEMORY MANAGEMENT & VIRTUAL MEMORY
+--------------------------------------------------------------------------------
+6.1 Paging Architecture
+Paging avoids external fragmentation by dividing physical memory into fixed-sized blocks called "Frames" and dividing logical process memory into identical-sized blocks called "Pages" (typically 4 KB).
+- A Logical Address generated by the CPU consists of a Page Number (p) and an Offset (d).
+- The Page Table translates the logical page number (p) into the physical frame number (f), while the offset (d) remains unchanged.
+- Translation Lookaside Buffer (TLB): A high-speed associative hardware cache inside the MMU that stores recent page-to-frame translations to avoid multiple physical memory accesses per memory reference.
+
+6.2 Virtual Memory & Demand Paging
+Virtual memory allows processes to execute even when their entire address space is not resident in physical RAM, separating logical memory from physical memory.
+- Demand Paging: Pages are loaded into RAM only when referenced during execution.
+- Page Fault: An interrupt raised by hardware when the CPU accesses a page whose "Valid-Invalid bit" in the page table is set to invalid (not present in RAM).
+  Page Fault Handling Sequence:
+  1. Hardware trap to OS kernel.
+  2. OS verifies if address reference is valid or an illegal access.
+  3. OS finds a free physical frame in RAM.
+  4. OS schedules disk I/O to read the required page from swap space into the allocated frame.
+  5. OS updates the page table entry (sets frame number and valid bit to 1).
+  6. OS restarts the instruction that caused the page fault.
+
+6.3 Page Replacement Algorithms
+When RAM is full and a page fault occurs, the OS must choose a victim page to evict to swap:
+1. FIFO (First-In, First-Out): Replaces the oldest loaded page. Suffers from Belady's Anomaly (increasing the number of page frames can counter-intuitively increase the number of page faults).
+2. Optimal Page Replacement (OPT): Replaces the page that will not be used for the longest period in the future. Provably minimum page faults, but impossible to implement in practice because future references cannot be known.
+3. Least Recently Used (LRU): Replaces the page that has not been referenced for the longest period of time. Approximates OPT by using past behavior as a predictor of the future; does not suffer from Belady's Anomaly.
+================================================================================

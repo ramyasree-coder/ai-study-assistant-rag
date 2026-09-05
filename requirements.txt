@@ -1,0 +1,9 @@
+streamlit>=1.35.0
+sentence-transformers>=2.7.0
+faiss-cpu>=1.8.0
+openai>=1.30.0
+pypdf>=4.2.0
+numpy>=1.24.0,<2.0.0
+python-certifi-win32>=1.6.1; sys_platform == 'win32'
+bcrypt>=4.1.0
+deep-translator>=1.11.0

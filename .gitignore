@@ -1,0 +1,22 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Streamlit secrets & local cache
+.streamlit/secrets.toml
+
+# User isolated data & credentials
+user_data/
+users.json
+
+# Temporary / OS
+.DS_Store
+Thumbs.db
+*.log
+tmp/
