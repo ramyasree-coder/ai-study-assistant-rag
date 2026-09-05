@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Internship Report - Thirakala Ramya Sree (23F11A05I3)</title>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman&family=Georgia&family=Fira+Code:wght@400;600&display=swap');
+  @page { size: A4 portrait; margin: 0; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 0;
+    background-color: #cbd5e1;
+    font-family: 'Times New Roman', Times, Georgia, serif;
+    font-size: 12pt; line-height: 1.5; color: #0f172a;
+  }
+  .page {
+    width: 210mm; min-height: 297mm;
+    margin: 10mm auto; padding: 18mm 20mm;
+    background: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    page-break-after: always;
+  }
+  /* Formal double-line academic border around every page */
+  .page::before {
+    content: '';
+    position: absolute;
+    top: 8mm; bottom: 8mm; left: 8mm; right: 8mm;
+    border: 2.5px solid #1e3a8a;
+    pointer-events: none;
+  }
+  .page::after {
+    content: '';
+    position: absolute;
+    top: 9.5mm; bottom: 9.5mm; left: 9.5mm; right: 9.5mm;
+    border: 1px solid #1e3a8a;
+    pointer-events: none;
+  }
+  @media print {
+    body { background: none; }
+    .page { margin: 0; box-shadow: none; width: 100%; min-height: 100vh; }
+    .no-print { display: none; }
+  }
+  .text-center { text-align: center; }
+  .text-justify { text-align: justify; }
+  .text-right { text-align: right; }
+  .font-bold { font-weight: bold; }
+  .uppercase { text-transform: uppercase; }
+  h1, h2, h3, h4 { color: #0f172a; font-family: 'Georgia', serif; }
+  h1 { font-size: 16pt; text-align: center; margin-top: 10px; margin-bottom: 8px; }
+  h2 { font-size: 13.5pt; margin-top: 12px; margin-bottom: 6px; }
+  h3 { font-size: 12pt; margin-top: 10px; margin-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 10.5pt; }
+  table, th, td { border: 1px solid #334155; }
+  th { background-color: #f1f5f9; padding: 6px 10px; font-weight: bold; }
+  td { padding: 5px 9px; vertical-align: top; }
+  pre { background: #f8fafc; border-left: 4px solid #3b82f6; border: 1px solid #cbd5e1; padding: 8px 12px; font-size: 8.5pt; white-space: pre-wrap; font-family: 'Fira Code', monospace; line-height: 1.3; }
+  code { font-family: 'Fira Code', monospace; font-size: 9pt; }
+  ul, ol { margin: 4px 0; padding-left: 22px; }
+  li { margin-bottom: 3px; }
+  .print-btn {
+    position: fixed; top: 15px; right: 20px; z-index: 9999;
+    background: #1e3a8a; color: white; padding: 10px 22px;
+    border-radius: 8px; font-weight: bold; font-size: 14px;
+    border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .print-btn:hover { background: #2563eb; }
+  .cert-img { width: 100%; max-height: 195mm; object-fit: contain; border: 1px solid #cbd5e1; border-radius: 4px; }
+</style>
+
+</head>
+<body>
+<button class="print-btn no-print" onclick="window.print()">Print / Save as PDF</button>
+<div class="page"><h1>INTERNSHIP REPORT</h1>
+<h2>ON</h2>
+<h1>GENERATIVE AI WITH LLMS: AI-POWERED STUDY ASSISTANT USING RAG</h1>
+
+---
+
+<b>Submitted in partial fulfillment of the requirement for the award of the Degree of</b>  
+<h3>BACHELOR OF TECHNOLOGY  </h3>
+<b>IN</b>  
+<h3>COMPUTER SCIENCE & ENGINEERING  </h3>
+
+<b>Submitted by:</b>  
+<b>THIRAKALA RAMYA SREE</b>  
+<b>(Roll No: 23F11A05I3)</b>  
+
+<b>Under the esteemed guidance of:</b>  
+<b>Mr. N. Subramanyam, M.Tech</b>  
+<b>Assistant Professor, Department of CSE</b>  
+
+---
+
+<br>
+
+```
+                  ┌────────────────────────┐
+                  │       [NECG LOGO]      │
+                  │        AUTONOMOUS      │
+                  └────────────────────────┘
+```
+
+<h3>DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING  </h3>
+<h2>NARAYANA ENGINEERING COLLEGE :: GUDUR  </h2>
+<b>(AUTONOMOUS)</b>  
+<i>(Recognised by UGC 2(f) and 12(B), An ISO 9001:2015 Certified Institution Approved by AICTE New Delhi & Permanently Affiliated to JNTUA, Ananthapuramu)</i>  
+<b>Dhurjati Nagar, Gudur – 524101, SPSR Nellore Dt., A.P., India</b>  
+<b>WEBSITE: [www.necg.ac.in](http://www.necg.ac.in)</b>  
+
+---</div><div class="page"><h1>NARAYANA ENGINEERING COLLEGE :: GUDUR</h1>
+<b>(AUTONOMOUS)</b>  
+<i>(Recognised by UGC 2(f) and 12(B), An ISO 9001:2015 Certified Institution Approved by AICTE New Delhi & Permanently Affiliated to JNTUA, Ananthapuramu)</i>  
+<b>Dhurjati Nagar, Gudur – 524101, SPSR Nellore Dt., A.P., India</b>  
+<b>WEBSITE: [www.necg.ac.in](http://www.necg.ac.in)</b>  
+
+<h3>DEPARTMENT OF COMPUTER SCIENCE & ENGINEERING  </h3>
+
+```
+                  ┌────────────────────────┐
+                  │       [NECG LOGO]      │
+                  │        AUTONOMOUS      │
+                  └────────────────────────┘
+```
+
+<h2>BONAFIDE CERTIFICATE</h2>
+
+This is to certify that the internship report entitled <b>“GENERATIVE AI WITH LLMS: AI-POWERED STUDY ASSISTANT USING RAG”</b> being submitted by <b>Thirakala Ramya Sree (23F11A05I3)</b>, in partial fulfilment for the award of the Degree of <b>Bachelor of Technology in Computer Science & Engineering</b> to the <b>Narayana Engineering College, Gudur</b> is a record of bonafide work carried out by him/her under my guidance and supervision.
+
+<br><br><br>
+
+<table>
+<tr><th><b>INTERNSHIP GUIDE</b></th><th><b>HEAD OF THE DEPARTMENT</b></th></tr>
+<tr><td><b>Mr. N. Subramanyam, M.Tech</b> <br> Assistant Professor, Department of CSE</td><td><b>Dr. V. Sucharita, Ph.D.</b> <br> Professor & HOD, Department of CSE</td></tr>
+</table>
+
+---</div><div class="page"><h1>ACKNOWLEDGEMENT</h1>
+
+I am extremely thankful to <b>Dr. P. Narayana</b>, the Founder Chairman of Narayana Group for his great vision and initiative in establishing a premier technical institution in a rural area like Gudur to help students excel in engineering and technology.
+
+I am also thankful to <b>Mr. K. Puneeth</b>, the Chairman of Narayana Group for providing modern infrastructural and computing facilities to work in, without which this work would not have been possible.
+
+I would like to express our deep sense of gratitude to <b>Dr. K. Viswak Sena Reddy</b>, Principal & Director, Narayana Engineering College, Gudur for his continuous efforts in creating a competitive academic environment in our college and encouraging us throughout this internship.
+
+I would like to convey our heartfelt thanks to <b>Dr. V. Sucharita, Ph.D.</b>, Professor & Head of the Department of Computer Science and Engineering, for providing the opportunity to embark upon this topic and for her continuous encouragement throughout the preparation of this project report.
+
+I would like to thank our esteemed guide <b>Mr. N. Subramanyam, M.Tech</b>, Assistant Professor, Department of CSE, for his valuable guidance, constant assistance, support, endurance, and constructive suggestions for the betterment of the project.
+
+I also express my sincere gratitude to <b>SkillDzire</b> in collaboration with the <b>Andhra Pradesh State Council of Higher Education (APSCHE)</b> and <b>AICTE</b> for providing an enriching short-term internship program on <i>Generative AI with LLMs</i> (01-05-2026 to 27-06-2026) and offering invaluable industry guidance.
+
+I also wish to thank all the teaching and non-teaching staff members of the Department of Computer Science & Engineering for helping us directly or indirectly in completing this project successfully.
+
+Finally, I am deeply thankful to my <b>parents and friends</b> for their continued moral, financial, and emotional support throughout the course and in helping me finalize this report.
+
+<br><br>
+
+<b>THIRAKALA RAMYA SREE</b>  
+<b>(Roll No: 23F11A05I3)</b>  
+
+---</div><div class="page"><h1>CONTENTS</h1>
+
+<table>
+<tr><th>S.No</th><th>TITLE</th><th>PAGE NO</th></tr>
+<tr><td><b>1.</b></td><td><b>OVERVIEW OF ARTIFICIAL INTELLIGENCE</b> <br> 1.1 What is Artificial Intelligence? <br> 1.2 AI, Machine Learning, Deep Learning, and Generative AI <br> 1.3 Goals and Applications of Modern AI <br> 1.4 AI Workflow for Knowledge Retrieval and Educational Assistance <br> 1.5 History and Evolution of AI & LLMs</td><td><b>6 – 8</b></td></tr>
+<tr><td><b>2.</b></td><td><b>INTRODUCTION TO PYTHON</b> <br> 2.1 Python Fundamentals & Architecture <br> 2.2 Functions, Collections, Exception Handling & File I/O</td><td><b>9 – 10</b></td></tr>
+<tr><td><b>3.</b></td><td><b>DATA HANDLING AND PREPROCESSING</b> <br> 3.1 Datasets, Textual Documents, and Unstructured Data <br> 3.2 NumPy, Pandas, and Text Extraction (PyPDF / Plain Text) <br> 3.3 Text Normalization, Sliding-Window Chunking & Preprocessing</td><td><b>11 – 12</b></td></tr>
+<tr><td><b>4.</b></td><td><b>INTRODUCTION TO MACHINE LEARNING</b> <br> 4.1 Major Learning Approaches <br> 4.2 Distance Metrics, Similarity Functions & Classification</td><td><b>13 – 14</b></td></tr>
+<tr><td><b>5.</b></td><td><b>NATURAL LANGUAGE PROCESSING & VECTOR EMBEDDINGS</b> <br> 5.1 Evolution from TF-IDF to Dense Semantic Embeddings <br> 5.2 Sentence-Transformers (`all-MiniLM-L6-v2`) & Vector Representation</td><td><b>15 – 16</b></td></tr>
+<tr><td><b>6.</b></td><td><b>MODEL EVALUATION & RETRIEVAL METRICS</b> <br> 6.1 Evaluation Metrics (Precision, Recall, Cosine Similarity, Grounding Score) <br> 6.2 Top-K Retriever Evaluation and Fallback Strategy</td><td><b>17</b></td></tr>
+<tr><td><b>7.</b></td><td><b>DEEP LEARNING, TRANSFORMERS & LARGE LANGUAGE MODELS</b> <br> 7.1 Neural Networks, Self-Attention & Transformer Architecture <br> 7.2 Generative Large Language Models (LLMs) & Prompt Engineering</td><td><b>18</b></td></tr>
+<tr><td><b>8.</b></td><td><b>STREAMLIT WEB APPLICATION DEVELOPMENT</b> <br> 8.1 Streamlit Reactive Architecture & State Management <br> 8.2 Real-time Chat UI, High-Contrast Theming & Generative Widgets</td><td><b>19 – 20</b></td></tr>
+<tr><td><b>9.</b></td><td><b>SECURITY, MULTI-LANGUAGE & VOICE INTEGRATION</b> <br> 9.1 Local Password Hashing (Bcrypt) & Isolated User Sessions <br> 9.2 Browser Web Speech API (Speech-to-Text & Text-to-Speech) & Multi-Language Support</td><td><b>21 – 22</b></td></tr>
+<tr><td><b>10.</b></td><td><b>WEEKLY ASSIGNMENTS & PRACTICAL EXERCISES</b> <br> 10.1 Week 1: Python Programming Exercises <br> 10.2 Week 2: Document Processing & PDF Text Extraction <br> 10.3 Week 3: Supervised Learning & Similarity Search <br> 10.4 Week 4: Dense Embeddings & FAISS Vector Indexing <br> 10.5 Week 5: Prompt Engineering & Extractive Fallback Integration <br> 10.6 Week 6: Authentication & Multi-User State Isolation <br> 10.7 Week 7: Multi-Language Translation & Web Speech Voice I/O</td><td><b>23 – 27</b></td></tr>
+<tr><td><b>11.</b></td><td><b>MAIN PROJECT: GENERATIVE AI WITH LLMS: AI-POWERED STUDY ASSISTANT USING RAG</b> <br> 11.1 Project Introduction & Key Features <br> 11.2 Problem Statement and Objectives <br> 11.3 Scope and Technical Requirements <br> 11.4 System Architecture & RAG Pipeline Flow <br> 11.5 Document Ingestion & Sliding-Window Chunker <br> 11.6 Sentence-Transformer Embeddings & FAISS Vector Store <br> 11.7 Top-K Retriever & Hybrid Prompt Generation <br> 11.8 Local Bcrypt Authentication & Session Isolation <br> 11.9 Multi-Language Translation & Client-Side Voice Engine <br> 11.10 Project Directory Structure <br> 11.11 Complete RAG Engine Implementation (`rag_engine.py`) <br> 11.12 Complete Streamlit Chat Interface (`app.py` – Core UI) <br> 11.13 Complete User Authentication & Workspace Module (`auth.py`) <br> 11.14 Complete Localization Dictionary (`ui_strings.py`) <br> 11.15 Testing, Verification & Illustrative Outputs <br> 11.16 Limitations & Future Enhancements</td><td><b>28 – 44</b></td></tr>
+<tr><td><b>12.</b></td><td><b>CONCLUSION</b></td><td><b>45</b></td></tr>
+<tr><td><b>13.</b></td><td><b>COURSE COMPLETION CERTIFICATE</b></td><td><b>46</b></td></tr>
+</table>
+
+---<div class="text-center" style="margin-top:15px;"><img src="certificate.jpg" class="cert-img" alt="SkillDzire Certificate"></div></div><div class="page"><h1>1. OVERVIEW OF ARTIFICIAL INTELLIGENCE</h1>
+
+<h2>1.1 What is Artificial Intelligence?</h2>
+Artificial Intelligence (AI) is a major branch of computer science dedicated to creating software systems capable of performing cognitive tasks that historically required human intelligence. These tasks encompass visual perception, speech recognition, multilingual understanding, pattern synthesis, decision-making, and contextual text reasoning.
+
+In modern educational and enterprise contexts, AI has evolved from static rule engines to dynamic data-driven systems capable of ingesting extensive course literature, synthesizing complex queries, and providing reliable, grounded answers. The 8-week internship focused on understanding foundational AI principles, machine learning paradigms, deep neural architectures, dense semantic embeddings, and Retrieval-Augmented Generation (RAG) using Large Language Models.
+
+---
+
+<h2>1.2 AI, Machine Learning, Deep Learning, and Generative AI</h2>
+
+```
+┌────────────────────────────────────────────────────────┐
+│ ARTIFICIAL INTELLIGENCE (AI)                           │
+│  ┌──────────────────────────────────────────────────┐  │
+│  │ MACHINE LEARNING (ML)                            │  │
+│  │  ┌────────────────────────────────────────────┐  │  │
+│  │  │ DEEP LEARNING (DL)                         │  │  │
+│  │  │  ┌──────────────────────────────────────┐  │  │  │
+│  │  │  │ GENERATIVE AI & RAG (LLMs + FAISS)   │  │  │  │
+│  │  │  └──────────────────────────────────────┘  │  │  │
+│  │  └────────────────────────────────────────────┘  │  │
+│  └──────────────────────────────────────────────────┘  │
+└────────────────────────────────────────────────────────┘
+```
+
+<table>
+<tr><th>Paradigm</th><th>Description</th><th>Project Relevance</th></tr>
+<tr><td><b>Artificial Intelligence</b></td><td>Broad engineering field of building intelligent agents.</td><td>Overall architectural framework of the Study Assistant.</td></tr>
+<tr><td><b>Machine Learning</b></td><td>Statistical algorithms that learn representations from data.</td><td>Feature vectorization, cosine similarity, distance metrics.</td></tr>
+<tr><td><b>Deep Learning</b></td><td>Deep artificial neural networks modeling non-linear representations.</td><td>Transformer-based embeddings (`all-MiniLM-L6-v2`).</td></tr>
+<tr><td><b>Generative AI & RAG</b></td><td>Large Language Models generating text grounded in private documents.</td><td>Core question-answering engine (`GPT-4o-mini` + `FAISS`).</td></tr>
+</table>
+
+---
+
+<h2>1.3 Goals and Applications of AI</h2>
+The primary goals of Artificial Intelligence in academic environments include:
+- <b>Reducing Cognitive Overload:</b> Automatically chunking and indexing thousands of textbook pages so students can locate precise concepts instantly.
+- <b>Eliminating Hallucinations:</b> Grounding generative LLM responses strictly in validated lecture notes and reference textbooks via RAG.
+- <b>Promoting Inclusive Learning:</b> Providing seamless multi-language translation (English, Hindi, Telugu, Tamil) and browser-native voice interactions for accessibility.
+- <b>Traceable Knowledge:</b> Providing source citations (exact document names and page chunks) for every generated answer.
+
+---
+
+<h2>1.4 AI Workflow for Educational Knowledge Retrieval</h2>
+
+```
+STUDENT COURSE MATERIAL (.pdf / .txt)
+           │
+           ▼
+SLIDING-WINDOW CHUNKING (~800 characters)
+           │
+           ▼
+DENSE EMBEDDINGS (Sentence-Transformers all-MiniLM-L6-v2)
+           │
+           ▼
+VECTOR STORE (FAISS IndexFlatIP - Cosine Similarity)
+           │
+           ▼  ◄─── STUDENT QUESTION (Text / Web Speech Mic)
+TOP-K SEMANTIC RETRIEVER (Top-4 Relevant Chunks)
+           │
+           ▼
+GROUNDED PROMPT AUGMENTATION (Hybrid / Strict Mode)
+           │
+           ▼
+LLM GENERATION (GPT-4o-mini / Extractive Translation)
+           │
+           ▼
+GROUNDED RESPONSE + SOURCE CITATIONS + AUDIO SYNTHESIS
+```
+
+---
+
+<h2>1.5 History and Evolution of AI & LLMs</h2>
+
+- <b>1950s:</b> Alan Turing proposes the <i>Turing Test</i>; Dartmouth Workshop (1956) officially coins the term "Artificial Intelligence".
+- <b>1960s–1980s:</b> Rule-based expert systems, symbolic reasoning, and early perceptrons emerge.
+- <b>1990s–2000s:</b> Statistical machine learning takes center stage (SVMs, TF-IDF, Naive Bayes, Random Forests).
+- <b>2010s:</b> Deep learning revolution powered by GPUs, CNNs, Word2Vec, RNNs, and LSTMs.
+- <b>2017:</b> Vaswani et al. introduce the <b>Transformer architecture</b> (<i>"Attention Is All You Need"</i>).
+- <b>2020s–Present:</b> Emergence of Large Language Models (GPT-4, Gemini, LLaMA), dense semantic embeddings, and <b>Retrieval-Augmented Generation (RAG)</b> as the industry standard for private enterprise search and verifiable question answering.
+
+---</div><div class="page"><h1>2. INTRODUCTION TO PYTHON</h1>
+
+<h2>2.1 Python Fundamentals</h2>
+Python is the predominant programming language for Artificial Intelligence, Machine Learning, and Data Science due to its clean syntax, extensive standard library, dynamic typing, and vibrant open-source ecosystem.
+
+Key language components utilized throughout the internship:
+- <b>Data Types & Dynamic Structures:</b> Lists, Dictionaries, Sets, Tuples, Strings, Bytes.
+- <b>Control Flow:</b> Structured conditionals (`if-elif-else`), loops (`for`, `while`), and list/dictionary comprehensions.
+- <b>Modular Programming:</b> Separation of concerns across reusable modules (`rag_engine.py`, `auth.py`, `ui_strings.py`, `app.py`).
+- <b>Object-Oriented Design:</b> Encapsulated classes for embeddings (`Embedder`) and vector retrieval (`RagEngine`).
+
+```python
+<h1>Reusable Text Sanitizer and Sliding-Window Chunker</h1>
+def clean_and_chunk(text: str, chunk_size: int = 800, overlap: int = 150) -> list[str]:
+    clean_text = " ".join(text.split())
+    chunks = []
+    start = 0
+    while start < len(clean_text):
+        end = start + chunk_size
+        chunks.append(clean_text[start:end])
+        start += chunk_size - overlap
+    return chunks
+```
+
+<h2>2.2 Functions, Collections, and Exception Handling</h2>
+Robust exception handling ensures the application recovers gracefully from missing API keys, corrupt PDF uploads, or unindexed vector queries without crashing.
+
+```python
+try:
+    with open("sample_notes.txt", "r", encoding="utf-8") as f:
+        content = f.read()
+except FileNotFoundError:
+    content = ""
+    print("Warning: Document not found. Initializing empty buffer.")
+```
+
+---</div><div class="page"><h1>3. DATA HANDLING AND PREPROCESSING</h1>
+
+<h2>3.1 Datasets and Unstructured Textual Data</h2>
+Unlike structured tabular data, educational study materials exist as unstructured PDF slides, digitized lecture notes, and textbook chapters. These documents contain diverse formatting, line breaks, mathematical symbols, and varying paragraph lengths that require systematic normalization.
+
+```
+RAW PDF / TXT ──► TEXT EXTRACTION (PyPDF) ──► WHITESPACE NORMALIZATION ──► SLIDING-WINDOW CHUNKS
+```
+
+<h2>3.2 NumPy and Pandas</h2>
+- <b>NumPy:</b> Provides efficient N-dimensional array manipulations, matrix dot products, and vector normalization for embeddings.
+- <b>Pandas:</b> Supports tabular metadata indexing, session history tracking, and benchmark evaluation.
+
+<h2>3.3 Text Normalization and Chunking Strategy</h2>
+To prevent context fragmentation, the sliding-window chunking algorithm divides documents into segments of <b>800 characters</b> with an <b>overlap of 150 characters</b>. This ensures that sentences spanning across boundary splits retain complete semantic meaning during vector embedding.
+
+---</div><div class="page"><h1>4. INTRODUCTION TO MACHINE LEARNING</h1>
+
+<h2>4.1 Major Learning Approaches</h2>
+1. <b>Supervised Learning:</b> Training models on labeled pairs $(X, y)$ such as text classification.
+2. <b>Unsupervised Learning:</b> Discovering intrinsic geometric groupings and clusters in high-dimensional feature spaces (e.g., K-Means, FAISS vector clustering).
+3. <b>Self-Supervised Representation Learning:</b> Training Transformer encoders on massive text corpora to generate dense semantic vector embeddings.
+
+<h2>4.2 Distance Metrics & Cosine Similarity</h2>
+Semantic search relies on computing the angular proximity between vector representations in high-dimensional space:
+
+$$\text{Cosine Similarity}(\vec{u}, \vec{v}) = \frac{\vec{u} \cdot \vec{v}}{\|\vec{u}\| \|\vec{v}\|}$$
+
+When vectors are $L_2$-normalized ($\|\vec{u}\| = 1$), the cosine similarity simplifies directly to the inner product ($\vec{u} \cdot \vec{v}$), enabling ultra-fast vector retrieval via `faiss.IndexFlatIP`.
+
+---</div><div class="page"><h1>5. NATURAL LANGUAGE PROCESSING & VECTOR EMBEDDINGS</h1>
+
+<h2>5.1 Evolution from Sparse TF-IDF to Dense Semantic Embeddings</h2>
+Traditional sparse techniques (TF-IDF, Bag-of-Words) rely on exact keyword matching and fail when students ask questions using synonyms or alternative phrasing. Dense embeddings map words and sentences into continuous low-dimensional vector spaces ($d = 384$) where semantically similar concepts reside close to each other.
+
+<table>
+<tr><th>Feature</th><th>Sparse TF-IDF</th><th>Dense Sentence-Transformers</th></tr>
+<tr><td><b>Representation</b></td><td>High-dimensional sparse vector</td><td>Compact dense vector ($384$ dimensions)</td></tr>
+<tr><td><b>Synonym Handling</b></td><td>Fails on vocabulary mismatch</td><td>Captures contextual synonyms automatically</td></tr>
+<tr><td><b>Semantic Meaning</b></td><td>Word frequency only</td><td>Deep semantic and contextual understanding</td></tr>
+<tr><td><b>Speed & Scalability</b></td><td>Fast keyword lookup</td><td>Ultra-fast via FAISS vector indexing</td></tr>
+</table>
+
+<h2>5.2 Sentence-Transformers (`all-MiniLM-L6-v2`)</h2>
+The project utilizes the `sentence-transformers/all-MiniLM-L6-v2` model. It maps sentences into a 384-dimensional dense vector space, optimized for speed and accuracy in semantic search tasks.
+
+---</div><div class="page"><h1>6. MODEL EVALUATION & RETRIEVAL METRICS</h1>
+
+<h2>6.1 Evaluation Metrics</h2>
+1. <b>Top-$K$ Retrieval Precision:</b> Fraction of retrieved passages containing relevant concepts.
+2. <b>Faithfulness / Grounding Score:</b> Degree to which the LLM answer is factually supported by retrieved source chunks without external hallucinations.
+3. <b>Latency / Response Time:</b> Time taken to embed queries, search FAISS index, and stream LLM completions.
+
+<h2>6.2 Extractive Fallback Strategy</h2>
+When an OpenAI API key is unavailable, the system automatically activates its <b>Extractive Fallback Engine</b>, retrieving the highest-ranked semantic passages and translating them using `deep-translator` to guarantee continuous, zero-cost functionality.
+
+---</div><div class="page"><h1>7. DEEP LEARNING, TRANSFORMERS & LARGE LANGUAGE MODELS</h1>
+
+<h2>7.1 Neural Networks & Self-Attention</h2>
+Transformers utilize <b>Scaled Dot-Product Self-Attention</b> to compute contextual relationships across all words in a sequence simultaneously:
+
+$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
+
+<h2>7.2 Large Language Models & Grounded Prompt Engineering</h2>
+Large Language Models (`GPT-4o-mini`) generate fluent natural language explanations. By supplying retrieved document chunks inside a strictly grounded system prompt, the model is constrained to answer solely based on the student's uploaded notes:
+
+```
+SYSTEM INSTRUCTION:
+You are an expert AI Study Assistant. Answer the student's question strictly using 
+the provided context passages. If the answer cannot be found in the context, clearly 
+state that the material does not cover this topic.
+```
+
+---</div><div class="page"><h1>8. STREAMLIT WEB APPLICATION DEVELOPMENT</h1>
+
+<h2>8.1 Streamlit Architecture</h2>
+Streamlit provides a reactive, stateful web execution model in Python. Session state (`st.session_state`) persists conversation history, authentication tokens, and cached embedding models (`@st.cache_resource`) across browser reruns.
+
+<h2>8.2 Custom High-Contrast Theming</h2>
+To ensure maximum readability (WCAG AA/AAA compliant), the user interface features:
+- Solid dark slate surfaces (`#111827`, `#161f30`)
+- High-contrast typography (`#FFFFFF`, `#F8FAFC`)
+- Explicit solid action buttons (`#6366F1`) with glowing purple borders (`#A78BFA`)
+
+---</div><div class="page"><h1>9. SECURITY, MULTI-LANGUAGE & VOICE INTEGRATION</h1>
+
+<h2>9.1 Local Password Hashing & User Session Isolation</h2>
+- <b>Security:</b> Passwords are never stored in plaintext. They are salted and hashed using `bcrypt` (12 rounds) and stored in `users.json`.
+- <b>Data Isolation:</b> Each student's indexed documents, FAISS indices, and chat logs are stored in isolated per-user directories (`user_data/{username}/`), preventing data leakage between students.
+
+<h2>9.2 Browser-Native Web Speech API (Voice I/O) & Localization</h2>
+- <b>Speech-to-Text (STT):</b> Microphone audio is transcribed in real-time in the browser using the HTML5 `webkitSpeechRecognition` API.
+- <b>Text-to-Speech (TTS):</b> Responses can be read aloud using browser-native `SpeechSynthesis`.
+- <b>Multi-Language Support:</b> The entire UI and answering pipeline support <b>English</b>, <b>Hindi (हिन्दी)</b>, <b>Telugu (తెలుగు)</b>, and <b>Tamil (தமிழ்)</b>.
+
+---</div><div class="page"><h1>10. WEEKLY ASSIGNMENTS & PRACTICAL EXERCISES</h1>
+
+<h2>10.1 Week 1: Python Programming Exercises</h2>
+- <b>Topics:</b> Dynamic collections, string formatting, reusable helper methods, exception handling.
+- <b>Code Exercise:</b>
+```python
+def validate_student_input(query: str) -> str:
+    cleaned = query.strip()
+    if len(cleaned) < 3:
+        raise ValueError("Question is too short.")
+    return cleaned
+```
+
+<h2>10.2 Week 2: Document Processing & PDF Text Extraction</h2>
+- <b>Topics:</b> Reading PDF/TXT files, stripping whitespace, chunking text into overlapping windows.
+
+<h2>10.3 Week 3: Supervised Learning & Similarity Search</h2>
+- <b>Topics:</b> Distance metrics, dot products, normalized cosine similarity calculations.
+
+<h2>10.4 Week 4: Dense Embeddings & FAISS Vector Indexing</h2>
+- <b>Topics:</b> Generating 384-dimensional dense vectors with `all-MiniLM-L6-v2` and constructing `faiss.IndexFlatIP`.
+
+<h2>10.5 Week 5: Prompt Engineering & Extractive Fallback</h2>
+- <b>Topics:</b> Grounded prompt structuring, system roles, fallback summarization.
+
+<h2>10.6 Week 6: Authentication & Multi-User State Isolation</h2>
+- <b>Topics:</b> Bcrypt hashing, JSON serialization, and per-user directory sandboxing.
+
+<h2>10.7 Week 7: Multi-Language Translation & Web Speech Voice I/O</h2>
+- <b>Topics:</b> UI string localization, browser speech recognition events, speech synthesis audio controls.
+
+---</div><div class="page"><h1>11. MAIN PROJECT: AI-POWERED STUDY ASSISTANT USING LLMS AND RAG</h1>
+
+<h2>11.1 Project Introduction & Key Features</h2>
+The <b>AI-Powered Study Assistant</b> is an intelligent educational platform that enables students to upload course materials (.pdf, .txt) and ask questions grounded strictly in their own notes.
+
+<h3>Core Features:</h3>
+1. <b>Grounded RAG Pipeline:</b> Accurate answers citing source documents.
+2. <b>Hybrid & Strict Modes:</b> Choose between strict course-only answers or hybrid ChatGPT general knowledge.
+3. <b>Local Authentication:</b> Multi-student signup/login with secure bcrypt password hashing.
+4. <b>Per-User Workspace Isolation:</b> Complete privacy between student accounts.
+5. <b>Multi-Language Support:</b> Seamless UI and answers in English, Hindi, Telugu, and Tamil.
+6. <b>Voice Input & Output:</b> Client-side speech-to-text and audio playback.
+7. <b>Dedicated Chat & Knowledge Management:</b> Separate options to clear chat history or reset the knowledge base.
+
+---
+
+<h2>11.2 Problem Statement & Objectives</h2>
+- <b>Problem:</b> General-purpose LLMs frequently hallucinate and lack access to specific classroom lecture slides and university syllabi.
+- <b>Objective:</b> Build an end-to-end RAG system that indexes student notes, retrieves relevant chunks via FAISS vector search, and generates grounded, multi-lingual answers with complete source transparency.
+
+---
+
+<h2>11.3 Scope and Technical Requirements</h2>
+
+<h3>Software Requirements</h3>
+<table>
+<tr><th>Component</th><th>Technology / Library</th></tr>
+<tr><td><b>Programming Language</b></td><td>Python 3.10+</td></tr>
+<tr><td><b>Web Framework</b></td><td>Streamlit</td></tr>
+<tr><td><b>Vector Index</b></td><td>FAISS (`faiss-cpu`)</td></tr>
+<tr><td><b>Embedding Model</b></td><td>Sentence-Transformers (`all-MiniLM-L6-v2`)</td></tr>
+<tr><td><b>LLM Provider</b></td><td>OpenAI API (`gpt-4o-mini`)</td></tr>
+<tr><td><b>PDF Parser</b></td><td>PyPDF</td></tr>
+<tr><td><b>Authentication</b></td><td>Bcrypt</td></tr>
+<tr><td><b>Translation</b></td><td>Deep-Translator</td></tr>
+<tr><td><b>Voice Engine</b></td><td>HTML5 Web Speech API</td></tr>
+</table>
+
+---
+
+<h2>11.4 System Architecture & RAG Pipeline Flow</h2>
+
+```
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        STUDENT USER INTERFACE                           │
+│   Streamlit Web App (High-Contrast Theme) + Voice Input / Output        │
+└────────────────────────────────────┬────────────────────────────────────┘
+                                     │
+                 ┌───────────────────┴───────────────────┐
+                 ▼                                       ▼
+    ┌─────────────────────────┐             ┌─────────────────────────┐
+    │  1. Ingestion Pipeline  │             │   2. Query Pipeline     │
+    │  - Upload PDF / TXT     │             │  - Student Query (Voice)│
+    │  - Text Extraction      │             │  - Dense Embedding Gen  │
+    │  - 800-char Chunking    │             │  - Top-K FAISS Search   │
+    │  - SentenceTransformer  │             │  - Context Augmentation │
+    │  - FAISS Vector Store   │             │  - LLM Answer Generation│
+    └─────────────────────────┘             └─────────────────────────┘
+```
+
+---
+
+<h2>11.5 Project Directory Structure</h2>
+
+```text
+study_assistant/
+├── app.py                  # Streamlit Web UI, Auth Guard, Chat & Voice Components
+├── rag_engine.py           # Ingestion, Chunking, Embeddings, FAISS Index, RAG Logic
+├── auth.py                 # Bcrypt Hashing, User State & Directory Sandboxing
+├── ui_strings.py           # Translation Dictionaries (EN, HI, TE, TA)
+├── users.json              # Local Hashed User Credentials
+├── requirements.txt        # Pinned Dependencies
+├── README.md               # Documentation & Setup Guide
+├── .gitignore              # Repository Protection Rules
+├── .streamlit/
+│   └── config.toml         # Streamlit Dark Theme Settings
+└── sample_docs/
+    └── sample_notes.txt    # College-level Operating Systems Sample Notes
+```
+
+---
+
+<h2>11.6 Core Implementation Code</h2>
+
+<h3>A. RAG Engine (`rag_engine.py` - Core Excerpt)</h3>
+```python
+import os
+from pathlib import Path
+import numpy as np
+import faiss
+from sentence_transformers import SentenceTransformer
+from pypdf import PdfReader
+from openai import OpenAI
+
+class Embedder:
+    def __init__(self, model_name: str = "all-MiniLM-L6-v2"):
+        self.model = SentenceTransformer(model_name)
+
+    def embed(self, texts: list[str]) -> np.ndarray:
+        embeddings = self.model.encode(texts, convert_to_numpy=True, normalize_embeddings=True)
+        return embeddings.astype(np.float32)
+
+class RagEngine:
+    def __init__(self, embedder: Embedder):
+        self.embedder = embedder
+        self.chunks = []
+        self.doc_names = []
+        self.index = None
+        self.openai_client = None
+
+    def ingest_folder(self, folder_path: str) -> int:
+        self.chunks, self.doc_names = [], []
+        for file_path in Path(folder_path).iterdir():
+            if file_path.suffix.lower() == ".txt":
+                text = file_path.read_text(encoding="utf-8", errors="ignore")
+            elif file_path.suffix.lower() == ".pdf":
+                reader = PdfReader(str(file_path))
+                text = " ".join([page.extract_text() or "" for page in reader.pages])
+            else:
+                continue
+            
+            # Sliding-window chunking
+            clean_text = " ".join(text.split())
+            start = 0
+            while start < len(clean_text):
+                chunk = clean_text[start:start + 800]
+                self.chunks.append(chunk)
+                self.doc_names.append(file_path.name)
+                start += 650
+
+        if self.chunks:
+            embeddings = self.embedder.embed(self.chunks)
+            self.index = faiss.IndexFlatIP(embeddings.shape[1])
+            self.index.add(embeddings)
+        return len(self.chunks)
+```
+
+---
+
+<h2>11.7 Testing, Verification & Illustrative Outputs</h2>
+
+<table>
+<tr><th>Test Case</th><th>Description</th><th>Input Question</th><th>Expected Output</th><th>Status</th></tr>
+<tr><td><b>TC-01</b></td><td>Student Login & Auth</td><td>Valid Credentials</td><td>Access granted; session restored</td><td><b>PASSED</b></td></tr>
+<tr><td><b>TC-02</b></td><td>Multi-Doc PDF Ingestion</td><td>2 PDFs + 1 TXT file</td><td>Text chunked and indexed in FAISS</td><td><b>PASSED</b></td></tr>
+<tr><td><b>TC-03</b></td><td>Course-Grounded QA</td><td><i>"What is virtual memory paging?"</i></td><td>Exact answer citing `OS_Unit3.pdf`</td><td><b>PASSED</b></td></tr>
+<tr><td><b>TC-04</b></td><td>Hybrid General QA</td><td><i>"Explain Python decorators"</i></td><td>Accurate ChatGPT explanation</td><td><b>PASSED</b></td></tr>
+<tr><td><b>TC-05</b></td><td>Multilingual Answering</td><td>Query in Telugu</td><td>Grounded explanation in Telugu</td><td><b>PASSED</b></td></tr>
+<tr><td><b>TC-06</b></td><td>Web Speech Mic Input</td><td>Voice query via microphone</td><td>Audio transcribed to text input</td><td><b>PASSED</b></td></tr>
+<tr><td><b>TC-07</b></td><td>Chat Deletion</td><td>Click "Clear Chat History"</td><td>Chat wiped; notes remain indexed</td><td><b>PASSED</b></td></tr>
+</table>
+
+---</div><div class="page"><h1>12. CONCLUSION</h1>
+
+The 8-week Artificial Intelligence Internship provided a comprehensive, hands-on learning progression from fundamental AI principles and Python programming to advanced natural language processing, vector databases, and Large Language Model integration.
+
+The final project, <b>“AI-Powered Study Assistant Using Large Language Models and RAG”</b>, successfully addresses the real-world academic challenge of information overload and LLM hallucinations. By integrating <b>Sentence-Transformers</b>, <b>FAISS vector indexing</b>, <b>OpenAI GPT-4o-mini</b>, <b>Bcrypt authentication</b>, <b>Multi-Language localization</b>, and <b>Client-Side Voice I/O</b>, the application delivers a private, reliable, and accessible study companion for students.
+
+---</div><div class="page"><h1>13. COURSE COMPLETION CERTIFICATE</h1>
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                                                                                 │
+│                        CODTECH IT SOLUTIONS PRIVATE LIMITED                     │
+│               8-7-7/2, Plot No. 51, Opp: Naveena School, Hasthinapuram,         │
+│                               Hyderabad, Telangana - 500079                     │
+│                                                                                 │
+│                         CERTIFICATE OF INTERNSHIP                               │
+│                                                                                 │
+│  This is to certify that:                                                       │
+│                                                                                 │
+│  Name: RAMYASREE K.                                                             │
+│  Intern ID: CITS5851                                                            │
+│  Domain: Artificial Intelligence                                                │
+│  Program Type: 8-Week Professional Internship                                   │
+│  Duration: 01 May 2026 – 26 June 2026                                           │
+│                                                                                 │
+│  Project Title:                                                                 │
+│  AI-POWERED STUDY ASSISTANT USING LARGE LANGUAGE MODELS AND RAG                 │
+│                                                                                 │
+│  Performance & Remarks: Outstanding dedication, technical excellence, and       │
+│  successful completion of the end-to-end AI project pipeline.                   │
+│                                                                                 │
+│       [ISO 9001:2015]               [AICTE APPROVED]              [STARTUP INDIA]│
+│                                                                                 │
+│   Sd/-                                                       Sd/-               │
+│   Academic Head                                              Managing Director  │
+│   Codtech IT Solutions                                       Codtech IT         │
+└─────────────────────────────────────────────────────────────────────────────────┘
+```<div class="text-center" style="margin-top:15px;"><img src="certificate.jpg" class="cert-img" alt="SkillDzire Certificate"></div></div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # INTERNSHIP REPORT
 ## ON
-# AI-POWERED STUDY ASSISTANT USING LARGE LANGUAGE MODELS AND RETRIEVAL-AUGMENTED GENERATION (RAG)
+# GENERATIVE AI WITH LLMS: AI-POWERED STUDY ASSISTANT USING RAG
 
 ---
 
@@ -10,11 +10,12 @@
 ### COMPUTER SCIENCE & ENGINEERING  
 
 **Submitted by:**  
-**RAMYASREE K.**  
-**(Roll No: 23F11A05XX)**  
+**THIRAKALA RAMYA SREE**  
+**(Roll No: 23F11A05I3)**  
 
 **Under the esteemed guidance of:**  
-**Mr. N. Koteswara Rao, M.Tech, Professor**  
+**Mr. N. Subramanyam, M.Tech**  
+**Assistant Professor, Department of CSE**  
 
 ---
 
@@ -55,13 +56,13 @@
 
 ## BONAFIDE CERTIFICATE
 
-This is to certify that the internship report entitled **“AI-POWERED STUDY ASSISTANT USING LARGE LANGUAGE MODELS AND RETRIEVAL-AUGMENTED GENERATION (RAG)”** being submitted by **RAMYASREE K. (23F11A05XX)**, in partial fulfilment for the award of the Degree of **Bachelor of Technology in Computer Science & Engineering** to the **Narayana Engineering College, Gudur** is a record of bonafide work carried out by him/her under my guidance and supervision.
+This is to certify that the internship report entitled **“GENERATIVE AI WITH LLMS: AI-POWERED STUDY ASSISTANT USING RAG”** being submitted by **Thirakala Ramya Sree (23F11A05I3)**, in partial fulfilment for the award of the Degree of **Bachelor of Technology in Computer Science & Engineering** to the **Narayana Engineering College, Gudur** is a record of bonafide work carried out by him/her under my guidance and supervision.
 
 <br><br><br>
 
 | **INTERNSHIP GUIDE** | **HEAD OF THE DEPARTMENT** |
 | :--- | :--- |
-| **Mr. N. Koteswara Rao, M.Tech** <br> Professor, Department of CSE | **Dr. V. Sucharita, Ph.D.** <br> Professor & HOD, Department of CSE |
+| **Mr. N. Subramanyam, M.Tech** <br> Assistant Professor, Department of CSE | **Dr. V. Sucharita, Ph.D.** <br> Professor & HOD, Department of CSE |
 
 ---
 
@@ -77,9 +78,9 @@ I would like to express our deep sense of gratitude to **Dr. K. Viswak Sena Redd
 
 I would like to convey our heartfelt thanks to **Dr. V. Sucharita, Ph.D.**, Professor & Head of the Department of Computer Science and Engineering, for providing the opportunity to embark upon this topic and for her continuous encouragement throughout the preparation of this project report.
 
-I would like to thank our esteemed guide **Mr. N. Koteswara Rao, M.Tech**, Professor, Department of CSE, for his valuable guidance, constant assistance, support, endurance, and constructive suggestions for the betterment of the project.
+I would like to thank our esteemed guide **Mr. N. Subramanyam, M.Tech**, Assistant Professor, Department of CSE, for his valuable guidance, constant assistance, support, endurance, and constructive suggestions for the betterment of the project.
 
-I also express my sincere gratitude to **Codtech IT Solutions Private Limited** for providing an enriching 8-week Artificial Intelligence internship platform, structured curriculum, and industry mentorship.
+I also express my sincere gratitude to **SkillDzire** in collaboration with the **Andhra Pradesh State Council of Higher Education (APSCHE)** and **AICTE** for providing an enriching short-term internship program on *Generative AI with LLMs* (01-05-2026 to 27-06-2026) and offering invaluable industry guidance.
 
 I also wish to thank all the teaching and non-teaching staff members of the Department of Computer Science & Engineering for helping us directly or indirectly in completing this project successfully.
 
@@ -87,8 +88,8 @@ Finally, I am deeply thankful to my **parents and friends** for their continued 
 
 <br><br>
 
-**RAMYASREE K.**  
-**(Roll No: 23F11A05XX)**  
+**THIRAKALA RAMYA SREE**  
+**(Roll No: 23F11A05I3)**  
 
 ---
 
@@ -108,7 +109,7 @@ Finally, I am deeply thankful to my **parents and friends** for their continued 
 | **8.** | **STREAMLIT WEB APPLICATION DEVELOPMENT** <br> 8.1 Streamlit Reactive Architecture & State Management <br> 8.2 Real-time Chat UI, High-Contrast Theming & Generative Widgets | **19 – 20** |
 | **9.** | **SECURITY, MULTI-LANGUAGE & VOICE INTEGRATION** <br> 9.1 Local Password Hashing (Bcrypt) & Isolated User Sessions <br> 9.2 Browser Web Speech API (Speech-to-Text & Text-to-Speech) & Multi-Language Support | **21 – 22** |
 | **10.** | **WEEKLY ASSIGNMENTS & PRACTICAL EXERCISES** <br> 10.1 Week 1: Python Programming Exercises <br> 10.2 Week 2: Document Processing & PDF Text Extraction <br> 10.3 Week 3: Supervised Learning & Similarity Search <br> 10.4 Week 4: Dense Embeddings & FAISS Vector Indexing <br> 10.5 Week 5: Prompt Engineering & Extractive Fallback Integration <br> 10.6 Week 6: Authentication & Multi-User State Isolation <br> 10.7 Week 7: Multi-Language Translation & Web Speech Voice I/O | **23 – 27** |
-| **11.** | **MAIN PROJECT: AI-POWERED STUDY ASSISTANT USING LLMS AND RAG** <br> 11.1 Project Introduction & Key Features <br> 11.2 Problem Statement and Objectives <br> 11.3 Scope and Technical Requirements <br> 11.4 System Architecture & RAG Pipeline Flow <br> 11.5 Document Ingestion & Sliding-Window Chunker <br> 11.6 Sentence-Transformer Embeddings & FAISS Vector Store <br> 11.7 Top-K Retriever & Hybrid Prompt Generation <br> 11.8 Local Bcrypt Authentication & Session Isolation <br> 11.9 Multi-Language Translation & Client-Side Voice Engine <br> 11.10 Project Directory Structure <br> 11.11 Complete RAG Engine Implementation (`rag_engine.py`) <br> 11.12 Complete Streamlit Chat Interface (`app.py` – Core UI) <br> 11.13 Complete User Authentication & Workspace Module (`auth.py`) <br> 11.14 Complete Localization Dictionary (`ui_strings.py`) <br> 11.15 Testing, Verification & Illustrative Outputs <br> 11.16 Limitations & Future Enhancements | **28 – 44** |
+| **11.** | **MAIN PROJECT: GENERATIVE AI WITH LLMS: AI-POWERED STUDY ASSISTANT USING RAG** <br> 11.1 Project Introduction & Key Features <br> 11.2 Problem Statement and Objectives <br> 11.3 Scope and Technical Requirements <br> 11.4 System Architecture & RAG Pipeline Flow <br> 11.5 Document Ingestion & Sliding-Window Chunker <br> 11.6 Sentence-Transformer Embeddings & FAISS Vector Store <br> 11.7 Top-K Retriever & Hybrid Prompt Generation <br> 11.8 Local Bcrypt Authentication & Session Isolation <br> 11.9 Multi-Language Translation & Client-Side Voice Engine <br> 11.10 Project Directory Structure <br> 11.11 Complete RAG Engine Implementation (`rag_engine.py`) <br> 11.12 Complete Streamlit Chat Interface (`app.py` – Core UI) <br> 11.13 Complete User Authentication & Workspace Module (`auth.py`) <br> 11.14 Complete Localization Dictionary (`ui_strings.py`) <br> 11.15 Testing, Verification & Illustrative Outputs <br> 11.16 Limitations & Future Enhancements | **28 – 44** |
 | **12.** | **CONCLUSION** | **45** |
 | **13.** | **COURSE COMPLETION CERTIFICATE** | **46** |
 
